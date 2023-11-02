@@ -1,5 +1,7 @@
 import logo from '../../assets/logocirc.png';
 import CartWidget from '../CartWidget/CartWidget';
+import { Link, NavLink } from 'react-router-dom';
+
 function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-danger-subtle">
@@ -11,13 +13,13 @@ function NavBar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <NavLink className={({isActive})=> isActive ? 'btn btn-outline-primary' : 'btn'} to="/">Home</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" href="#">Products</a>
+        <NavLink className={({isActive})=> isActive ? 'btn btn-outline-primary' : 'btn'}  to="/category/paintings">Paintings</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" href="#">About Us</a>
+        <NavLink className={({isActive})=> isActive ? 'btn btn-outline-primary' : 'btn'}  to="/category/sculptures">Sculptures</NavLink>
         </li>
       </ul>
     </div>
