@@ -1,41 +1,33 @@
+import { Link } from "react-router-dom";
 import { Filter } from "./Filter";
-const productFiltered = ({products, filterState,handleFilterChange}) => (
+const productFiltered = ({products, filterState}) => (
     <>
-        <div className="w-50 text-center">
-            <label>Buscar</label>
-            <input className="form-control" type="text" value={filterState} onChange={handleFilterChange}/>
-        </div>
-        <br />
 
         {
             filterState === '' ? 
                 
-                    products.map(product => <div className="card w-25">
+                    products.map(product => <div className="card w-25 m-3" key={product.id}>
                                                 <img src={product.imageUrl} className="card-img-top"/>
                                                 <div className="card-body">
-                                                    <p>Nombre: {product.name}</p>
-                                                    <p>Category: {product.category}</p>
-                                                    <p>Precio: {product.price}</p>
+                                                    <p>Title: {product.title}</p>
+                                                    <p>Price: {product.price}</p>
                                                 </div>
                                                 <div className="card-footer">
-                                                    <button className="btn btn-outline-dark w-100">detalle</button>
+                                                <Link to={`/detail/${product.id}`}>Details</Link>
                                                 </div>
                                             </div>
                     )
                 
                 :
                 
-                    products
-                        .filter(prod => prod.name.toLowerCase().includes(filterState.toLowerCase()))
-                        .map(product => <div className="card w-25">
+                    products.map(product => <div className="card w-25 m-3" key={product.id}>
                                             <img src={product.imageUrl} className="card-img-top"/>
                                             <div className="card-body">
-                                                <p>Nombre: {product.name}</p>
-                                                <p>Category: {product.category}</p>
-                                                <p>Precio: {product.price}</p>
+                                                <p>Title: {product.title}</p>
+                                                <p>Price: {product.price}</p>
                                             </div>
                                             <div className="card-footer">
-                                                <button className="btn btn-outline-dark w-100">detalle</button>
+                                            <Link to={`/detail/${product.id}`}>Details</Link>
                                             </div>
                                         </div>
                     )
@@ -47,8 +39,10 @@ const productFiltered = ({products, filterState,handleFilterChange}) => (
 
 export const ItemList = ({products}) => {
   return (
-    <Filter products= {products}>
+    <>
+         <Filter products= {products}>
         { productFiltered }
-    </Filter>
+        </Filter>
+    </>
   )
 }

@@ -1,45 +1,45 @@
-import { useEffect, useState } from "react"
-import { mFetch } from "../helpers/mFetch"
-import ItemCount from "../ItemCount/ItemCount"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ItemList } from "../ItemList/ItemList";
+import { Loading } from "../Loading/Loading";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../Firebase/config";
 
-function ItemListContainer({greetings = 'saludo por defecto'}) {
-    const [ products, setProducts] = useState ([])
-    const { cid } = useParams()
+function ItemListContainer({ greetings = 'saludo por defecto' }) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { cid } = useParams();
 
   useEffect(() => {
-    if(cid){
-      mFetch()
-    .then(resultado => setProducts(resultado.filter(product => product.category===cid)))
-    .catch(error => console.log(error))
+    const fetchProducts = async () => {
+      setLoading(true);
 
-    }else{
-      mFetch()
-     .then(resultado => setProducts(resultado))
-     .catch(error => console.log(error))
-    }
-}, [cid])
+      try {
+        const productsRef = collection(db, "products");
+        const q = cid ? query(productsRef, where("category", "==", cid)) : productsRef;
+        const querySnapshot = await getDocs(q);
 
-return (
-  <>
- <div>
-  {greetings}
- </div>
+        setProducts(
+          querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }))
+        );
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-<div className= "d-flex justify-content-center align-items-center">
-{products.map(product => <div className="card w-25">
-                              <div className="card-body">
-                              <img src={product.imageUrl} className="img-fluid"  style={{ height: '20rem' }}/>
-                              <p>Nombre: {product.title}</p>
-                              <p>Category: {product.category}</p>
-                              <p>Price: {product.price}</p>
-                              </div>
-                              <div className="card-footer">
-                                <button className="variant="primary>Details</button>
-                              </div>
-                          </div>)}
-</div>
-  </>
-)
+    fetchProducts();
+  }, [cid]);
+
+  return (
+    <>
+      {loading ? <Loading /> : <ItemList products={products} />}
+    </>
+  );
 }
-export default ItemListContainer
+
+export default ItemListContainer;

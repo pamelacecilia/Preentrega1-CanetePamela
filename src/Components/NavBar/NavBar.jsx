@@ -24,7 +24,7 @@ function NavBar() {
       </ul>
     </div>
   </div>
-  <CartWidget />
+  <NavLink to='/cart'><CartWidget /></NavLink>
 </nav>
   );
 }

@@ -1,41 +1,21 @@
-import { useState } from "react"
+import { Link } from "react-router-dom"
 
-const ItemCount = ({ initial, stock, onAdd }) => {   
-    const [counter, setcounter] = useState(initial)    
-    
-    const handleAdd = ()=>{
-        if (counter < stock) setcounter(counter+1)
-        
-    }
-    const handleSubstract = (evt)=>{
-        console.log(evt)
-        if (counter > initial) setcounter(counter - 1)
-        
 
-    }
+const ItemCount = ({ quantity, handleSubstract, handleAdd, handleAddToCart }) => {     
+   
 
-    const handleOnAdd = () => onAdd(counter )
-    
-
-    return <center>
-                <h2>Contador</h2>
-                <button className="btn btn-outline-dark" onClick={handleAdd}> + 1 </button>                
-                <label>
-                    <strong>{ counter }</strong>
-                </label>
-                <button 
-                    className="btn btn-outline-dark" 
-                    onClick={handleSubstract}
-                > 
-                    - 1 
-                </button>      
-                <button 
-                    className="btn btn-outline-dark" 
-                    onClick={handleOnAdd}
-                > 
-                    Agregar al carrito
-                </button>          
-            </center>
-} 
+    return <>
+        <div>
+            <button className="btn btn-outline-dark" onClick={handleAdd}> + 1 </button>
+            <p>{quantity}</p>
+            <button className="btn btn-outline-dark" onClick={handleSubstract}> - 1 </button> 
+        </div>
+        <Link to ='/cart'>     
+                <button className="btn btn-outline-dark" onClick={handleAddToCart}> 
+                    Add to Cart
+                </button>  
+        </Link>        
+            </>
+}
 
 export default ItemCount
