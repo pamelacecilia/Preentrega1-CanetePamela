@@ -31,6 +31,10 @@ export const CartContextProvider = ({children}) => {
       const emptyCart = () => {
         setCart([]);
       };
+
+      const cartnumber = () => {
+        return cart.reduce((acc, prod) => acc + prod.quantity, 0);
+      };
     
       return (
         <CartContext.Provider
@@ -41,6 +45,7 @@ export const CartContextProvider = ({children}) => {
             quantityInCart,
             totalPrice,
             emptyCart,
+            cartnumber
           }}
         >
           {children}

@@ -3,19 +3,10 @@
 
 - 🔭 Este es mi proyecto **Samsara ecommerce**
 
-- 🌱 En este proyecto he estado trabajando con React JS aplicando todo lo visto en clase, separando responsabilidades por modulo, usando firebase y mucho mas.
-<h3 align="left">  AQUI LA APIKEY PARA PODER VER EL PROYECTO
-apiKey: "AIzaSyC3TnVY93UH-rx-8fbvkavznudzyoLVPHI",
-
-  authDomain: "canetepamelareact.firebaseapp.com",
-
-  projectId: "canetepamelareact",
-
-  storageBucket: "canetepamelareact.appspot.com",
-
-  messagingSenderId: "1067019216093",
-
-  appId: "1:1067019216093:web:84ec8226947890ab3e6734"
+- 🌱 En este proyecto he estado trabajando con React JS aplicando todo lo visto en clase, separando responsabilidades por modulo, usando firebase y devolviendo un ID de compra al finalizar.
+El ecommerce ofrece un Home que muestra el total de los productos, luego dos categorias donde se pueden comprar Pinturas o Esculturas, y al agregar al carrito te lleva directamente al carrito donde te da la opcion de vaciar el carrito, finalizar compra o seguir comprando. En Finalizar compra hay un formulario de checkout para completar con los datos del cliente y finalmente da al cliente un numero de compra.
+<h3 align="left"> 
+Ademas de las librerias vistas en el curso, use la libreria de react-hook-form para mejor manejo de datos en el formulario de checkout.
 </h3>
 <p align="left">
 </p>
